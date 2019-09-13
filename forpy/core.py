@@ -25,11 +25,11 @@ class Forpy:
             raise ValueError('Incorrect platform passed.Options: xbl,pc,psn')
 		
         try:
-	    async with self.session.get(f'{self.player}/{platform}/{epic_username}',timeout=self.timeout,headers=self.headers) as resp:
+            async with self.session.get(f'{self.player}/{platform}/{epic_username}',timeout=self.timeout,headers=self.headers) as resp:
 	        if resp.status == 200:
 					
                     raw_data = await resp.json()
-		    if raw_data.get('error'):
+                    if raw_data.get('error'):
 					
                         raise NotFound()					
 					
@@ -37,10 +37,10 @@ class Forpy:
 	        elif 500 > resp.status >400:
 	            raise Unauthorized()
 
-	        else:
-		    raise UnknownError()
+                else:
+                    raise UnknownError()
         except asyncio.TimeoutError():
-	    raise NotResponding()
+            raise NotResponding()
 
         data = Box(raw_data,camel_killer_box=True)
         player = Player(data,camel_killer_box=True)
@@ -71,7 +71,7 @@ class Player(Box):
 
     async def get_solos(self):
         try:
-	    return self.stats.p2
+            return self.stats.p2
         except AttributeError:
             raise NoGames('solos')
 
@@ -80,20 +80,20 @@ class Player(Box):
             return self.stats.p10
 	    
         except AttributeError:
-	    raise NoGames('solo')
+            raise NoGames('solo')
 
     async def get_squads(self):
         try:
-	    return self.stats.p9
+            return self.stats.p9
         except AttributeError:
-	    raise NoGames('squads')
+            raise NoGames('squads')
 
     async def get_lifetime_stats(self):
         try:
-	    return self.life_time_stats
+            return self.life_time_stats
 
         except AttributeError:
-	    raise NoGames('the game or any of its')
+            raise NoGames('the game or any of its')
 
 
 
