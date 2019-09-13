@@ -4,15 +4,17 @@ import asyncio
 from .errors import *
 class Forpy:
 	def __init__(self,token,timeout=10):
-		self.token = token
-		self.timeout = timeout
-		self.session = aiohttp.ClientSession()
-		self.headers = {
-			'TRN-Api-key': token
+            self.token = token
+	    self.timeout = timeout
+	    self.session = aiohttp.ClientSession()
+	    self.headers = {
+		    'TRN-Api-key': token
 		}
-		self.platforms = ['pc','xbl','psn']
-		self.baseurl = 'http://api.fortnitetracker.com/v1'
-		self.player = self.baseurl + '/profile'
+		
+            self.platforms = ['pc','xbl','psn']
+	    self.baseurl = 'http://api.fortnitetracker.com/v1'
+		
+            self.player = self.baseurl + '/profile'
 
 	async def close(self):
             await self.session.close()
