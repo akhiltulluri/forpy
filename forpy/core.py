@@ -26,7 +26,7 @@ class Forpy:
 		
         try:
             async with self.session.get(f'{self.player}/{platform}/{epic_username}',timeout=self.timeout,headers=self.headers) as resp:
-	        if resp.status == 200:
+                if resp.status == 200:
 					
                     raw_data = await resp.json()
                     if raw_data.get('error'):
@@ -34,8 +34,8 @@ class Forpy:
                         raise NotFound()					
 					
 
-	        elif 500 > resp.status >400:
-	            raise Unauthorized()
+                elif 500 > resp.status >400:
+                    raise Unauthorized()
 
                 else:
                     raise UnknownError()
