@@ -1,4 +1,4 @@
-from .core import Client,Player
+from .core import Forpy,Player
 from .errors import *
 
 

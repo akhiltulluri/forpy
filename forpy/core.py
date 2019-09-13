@@ -22,9 +22,12 @@ class Forpy:
 			async with self.session.get(f'{self.player}/{platform}/{epic_username}',timeout=self.timeout,headers=self.headers) as resp:
 				if resp.status == 200:
 					raw_data = await resp.json()
-					data = Box(data,camel_killer_box=True)
 					if raw_data.get('error'):
 						raise NotFound()
+					data = Box(data,camel_killer_box=True)
+					player = Player(data,camel_killer_box=True)
+					return player 
+					
 
 				elif 500 > resp.status >400:
 					raise Unauthorized()
@@ -33,20 +36,26 @@ class Forpy:
 					raise UnknownError()
 
 		except asyncio.TimeoutError():
-			raise NotResponding()
-
-		
-		return data
-
-
+			raise NotResponding()		
 
 		async def get_id(self,platform,epic_username):
 			profile = await self.get_player(platform,epic_username)
-			return data.accountId
+			return profile.get_id()
 
 		async def get_solos(self,platform,epic_username):
 			profile= await self.get_player(platform,epic_username)
-			pass
+			return profile.get_solos()
+
+		async def get_duos(self,platform,epic_username):
+			profile=await self.get_player(platform,epic_username)
+			return profile.get_duos()
+		async def get_squads(self,platform,epic_username):
+			profile=await self.get_player(platform,epic_username)
+			return profile.get_squads()
+		async def get_lifetime_stats(self,platform,epic_username):
+			profile=await self.get_player(platform,epic_username)
+			return profile.get_lifetime_stats()
+
 
 class Player(Box):
 	async def get_id(self):
