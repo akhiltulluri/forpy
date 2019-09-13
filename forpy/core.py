@@ -14,11 +14,8 @@ class Forpy:
 		self.baseurl = 'http://api.fortnitetracker.com/v1'
 		self.player = self.baseurl + '/profile'
 
-	def __del__(self):
-            if not self.session.closed:
-                if self.session._connector_owner:
-                    self.session._connector.close()
-                self.session._connector = None
+	async def close(self):
+            await self.session.close()
             
 	async def get_player(self,platform,epic_username):
 		platform = platform.lower()
