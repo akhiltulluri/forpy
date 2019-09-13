@@ -35,7 +35,7 @@ class Forpy:
 		except asyncio.TimeoutError():
 			raise NotResponding()
 
-		data = Box(data,camel_killer_box=True)
+		data = Box(raw_data,camel_killer_box=True)
 		player = Player(data,camel_killer_box=True)
 		return player 		
 
