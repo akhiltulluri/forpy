@@ -5,14 +5,14 @@ from .errors import *
 class Forpy:
     def __init__(self,token,timeout=10):
         self.token = token
-	self.timeout = timeout
-	self.session = aiohttp.ClientSession()
-	self.headers = {
+        self.timeout = timeout
+        self.session = aiohttp.ClientSession()
+        self.headers = {
 		'TRN-Api-key': token
 	}
 		
         self.platforms = ['pc','xbl','psn']
-	self.baseurl = 'http://api.fortnitetracker.com/v1'
+        self.baseurl = 'http://api.fortnitetracker.com/v1'
 		
         self.player = self.baseurl + '/profile'
 
@@ -34,65 +34,65 @@ class Forpy:
                         raise NotFound()					
 					
 
-		elif 500 > resp.status >400:
+	        elif 500 > resp.status >400:
 	            raise Unauthorized()
 
-		else:
+	        else:
 		    raise UnknownError()
         except asyncio.TimeoutError():
 	    raise NotResponding()
 
-	data = Box(raw_data,camel_killer_box=True)
-	player = Player(data,camel_killer_box=True)
-	return player 		
+        data = Box(raw_data,camel_killer_box=True)
+        player = Player(data,camel_killer_box=True)
+        return player 		
 
     async def get_id(self,platform,epic_username):
-	profile = await self.get_player(platform,epic_username)
-	return profile.get_id()
+        profile = await self.get_player(platform,epic_username)
+        return profile.get_id()
 
     async def get_solos(self,platform,epic_username):
-	profile= await self.get_player(platform,epic_username)
-	return profile.get_solos()
+        profile= await self.get_player(platform,epic_username)
+        return profile.get_solos()
 
     async def get_duos(self,platform,epic_username):
-	profile=await self.get_player(platform,epic_username)
-	return profile.get_duos()
+        profile=await self.get_player(platform,epic_username)
+        return profile.get_duos()
     async def get_squads(self,platform,epic_username):
-	profile=await self.get_player(platform,epic_username)
-	return profile.get_squads()
+        profile=await self.get_player(platform,epic_username)
+        return profile.get_squads()
     async def get_lifetime_stats(self,platform,epic_username):
-	profile=await self.get_player(platform,epic_username)
-	return profile.get_lifetime_stats()
+        profile=await self.get_player(platform,epic_username)
+        return profile.get_lifetime_stats()
 
 
 class Player(Box):
     async def get_id(self):
-	return self.account_id
+        return self.account_id
 
     async def get_solos(self):
-	try:
+        try:
 	    return self.stats.p2
-	except AttributeError:
+        except AttributeError:
             raise NoGames('solos')
 
     async def get_duos(self):
-	try:
+        try:
             return self.stats.p10
 	    
         except AttributeError:
 	    raise NoGames('solo')
 
     async def get_squads(self):
-	try:
+        try:
 	    return self.stats.p9
-	except AttributeError:
+        except AttributeError:
 	    raise NoGames('squads')
 
     async def get_lifetime_stats(self):
-	try:
+        try:
 	    return self.life_time_stats
 
-	except AttributeError:
+        except AttributeError:
 	    raise NoGames('the game or any of its')
 
 
