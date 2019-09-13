@@ -34,11 +34,11 @@ class Forpy:
                             raise NotFound()					
 					
 
-			elif 500 > resp.status >400:
-			    raise Unauthorized()
+		    elif 500 > resp.status >400:
+			raise Unauthorized()
 
-			else:
-			    raise UnknownError()
+		    else:
+			raise UnknownError()
             except asyncio.TimeoutError():
 	        raise NotResponding()
 
