@@ -23,10 +23,7 @@ class Forpy:
 				if resp.status == 200:
 					raw_data = await resp.json()
 					if raw_data.get('error'):
-						raise NotFound()
-					data = Box(data,camel_killer_box=True)
-					player = Player(data,camel_killer_box=True)
-					return player 
+						raise NotFound()					
 					
 
 				elif 500 > resp.status >400:
@@ -36,7 +33,11 @@ class Forpy:
 					raise UnknownError()
 
 		except asyncio.TimeoutError():
-			raise NotResponding()		
+			raise NotResponding()
+
+		data = Box(data,camel_killer_box=True)
+		player = Player(data,camel_killer_box=True)
+		return player 		
 
 		async def get_id(self,platform,epic_username):
 			profile = await self.get_player(platform,epic_username)
