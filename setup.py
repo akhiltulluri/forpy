@@ -10,7 +10,7 @@ setup(
     author_email='akhilaug2003@gmail.com',
     license='MIT',
     keywords=['fortnite, forpy, api-wrapper, async'],
-    python_requires>='3.6',
+    python_requires='>=3.6',
     packages=find_packages(),
     install_requires=['aiohttp', 'python-box']
 )
