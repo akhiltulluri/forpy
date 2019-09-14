@@ -17,7 +17,7 @@ Forpy is an asynchronous library which allows you to receive Fortnite Stats data
 ## Installation
 You can install this using pip
 ```commandline
-pip install forpy
+pip install for.py
 ```
 ## Documentation
 Documentation can be found [here](https://akhil2149.github.io/forpy-docs)
