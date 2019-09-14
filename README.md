@@ -7,6 +7,11 @@
 <a href="https://github.com/akhil2149/forpy/LICENSE">
     <img src="https://img.shields.io/github/license/akhil2149/forpy.svg?style=for-the-badge&colorB=7289DA" alt="LICENSE" />
   </a>
+
+
+<a href="https://pypi.org/project/for.py/">
+    <img src="https://img.shields.io/pypi/v/for.py.svg?style=for-the-badge&colorB=61829F" alt="PyPi" />
+  </a>
 </div>
 <br>
 
